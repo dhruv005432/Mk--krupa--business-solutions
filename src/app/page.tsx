@@ -174,6 +174,7 @@ const teamContacts = [
     description:
       "Leads new enquiries, business discussions and finalising the scope and quotation for each project.",
     image: "/images/founder-dhruv.png",
+    orientation: "landscape",
   },
   {
     name: "Smit Hirpara",
@@ -182,6 +183,7 @@ const teamContacts = [
     description:
       "Handles brand development and marketplace support, from positioning and identity to listings and catalogues.",
     image: "/images/cofounder-smit.png",
+    orientation: "landscape",
   },
   {
     name: "S. R. Savani",
@@ -190,6 +192,7 @@ const teamContacts = [
     description:
       "Coordinates day-to-day work between clients and the team and keeps project timelines on track.",
     image: "/images/team-sr-savani.png",
+    orientation: "portrait",
   },
 ];
 
@@ -545,7 +548,7 @@ export default function Home() {
                 key={member.name}
                 className={`team-item ${index % 2 === 0 ? "team-item-left" : "team-item-right"}`}
               >
-                <div className="team-photo">
+                <div className={`team-photo photo-${member.orientation}`}>
                   <Image
                     src={member.image}
                     alt={member.name}

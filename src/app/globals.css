@@ -375,7 +375,7 @@ ul {
 
 .hero-image-frame {
   position: relative;
-  aspect-ratio: 4 / 4.4;
+  aspect-ratio: 3 / 2;
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -385,7 +385,7 @@ ul {
 
 .hero-image-frame img {
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
 }
 
 .image-caption {
@@ -813,7 +813,8 @@ ul {
 
 .team-item {
   display: grid;
-  grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  align-items: center;
   gap: 0;
   width: min(100%, 780px);
   background: #fff;
@@ -845,13 +846,17 @@ ul {
 
 .team-photo {
   position: relative;
-  min-height: 260px;
+  aspect-ratio: 3 / 2;
   background: var(--cream-deep);
+}
+
+.team-photo.photo-portrait {
+  aspect-ratio: 3 / 4;
 }
 
 .team-photo img {
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
 }
 
 .team-copy {
@@ -1343,8 +1348,8 @@ ul {
     direction: ltr;
   }
 
-  .team-photo {
-    min-height: 300px;
+  .team-photo.photo-portrait {
+    aspect-ratio: 4 / 5;
   }
 
   .footer-main {
