@@ -92,7 +92,7 @@ const services = [
 ];
 
 const industries = [
-  { icon: "fa-solid fa-sparkles", title: "Beauty & Personal Care" },
+  { icon: "fa-solid fa-spa", title: "Beauty & Personal Care" },
   { icon: "fa-solid fa-wind", title: "Perfumes & Fragrances" },
   { icon: "fa-solid fa-gem", title: "Fashion & Jewellery" },
   { icon: "fa-solid fa-couch", title: "Home & Kitchen" },
