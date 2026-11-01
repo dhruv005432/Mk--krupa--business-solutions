@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { FormEvent, useState } from "react";
 
-const BUSINESS_WHATSAPP = "917862832972";
+const WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/K2D6dTyPvXyEi0dggEc2IG";
 const githubRepoUrl = "https://github.com/dhruv005432/Mk--krupa--business-solutions";
 
 const navLinks = [
@@ -221,12 +221,88 @@ function ArrowIcon({ diagonal = false }: { diagonal?: boolean }) {
   );
 }
 
+async function downloadEnquiryPdf(enquiry: {
+  name: string;
+  phone: string;
+  service: string;
+  details: string;
+}) {
+  const { jsPDF } = await import("jspdf");
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const margin = 48;
+
+  doc.setFillColor(198, 146, 46);
+  doc.rect(0, 0, pageWidth, 92, "F");
+  doc.setTextColor(255, 255, 255);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(19);
+  doc.text("MK KRUPA BUSINESS SOLUTIONS", margin, 45);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(10);
+  doc.text("Brand  ·  Marketplace  ·  Sourcing  ·  Consulting  ·  Digital Presence", margin, 66);
+
+  doc.setTextColor(23, 22, 19);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(15);
+  doc.text("New Website Enquiry", margin, 140);
+
+  const submittedAt = new Date().toLocaleString("en-IN", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(10);
+  doc.setTextColor(111, 107, 99);
+  doc.text(`Submitted: ${submittedAt}`, margin, 160);
+
+  const rows: [string, string][] = [
+    ["Name", enquiry.name],
+    ["Phone / WhatsApp", enquiry.phone],
+    ["Service", enquiry.service],
+    ["Requirements", enquiry.details || "Not specified"],
+  ];
+
+  const valueX = margin + 150;
+  const valueWidth = pageWidth - margin - valueX;
+  let y = 200;
+
+  rows.forEach(([label, value]) => {
+    doc.setDrawColor(233, 228, 217);
+    doc.line(margin, y - 15, pageWidth - margin, y - 15);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.setTextColor(23, 22, 19);
+    doc.text(label, margin, y);
+
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(60, 58, 54);
+    const lines = doc.splitTextToSize(value, valueWidth);
+    doc.text(lines, valueX, y);
+    y += Math.max(lines.length * 16, 20) + 16;
+  });
+
+  doc.setDrawColor(233, 228, 217);
+  doc.line(margin, y - 15, pageWidth - margin, y - 15);
+  doc.setFontSize(9);
+  doc.setTextColor(140, 136, 128);
+  doc.text(
+    "Generated from the MK KRUPA Business Solutions website contact form.",
+    margin,
+    y + 16
+  );
+
+  const safeName = enquiry.name.replace(/[^a-z0-9]+/gi, "-").replace(/^-+|-+$/g, "");
+  doc.save(`MK-KRUPA-Enquiry-${safeName || "New"}.pdf`);
+}
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [formMessage, setFormMessage] = useState("");
   const [preparedMessage, setPreparedMessage] = useState("");
 
-  function handleEnquiry(event: FormEvent<HTMLFormElement>) {
+  async function handleEnquiry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const name = String(data.get("name") ?? "").trim();
@@ -244,13 +320,20 @@ export default function Home() {
     ].join("\n");
 
     setPreparedMessage(message);
-    setFormMessage("Your details are ready. WhatsApp is opening so you can review and send the message.");
 
-    window.open(
-      `https://wa.me/${BUSINESS_WHATSAPP}?text=${encodeURIComponent(message)}`,
-      "_blank",
-      "noopener,noreferrer"
-    );
+    // WhatsApp group links cannot carry a pre-filled message, so open the group
+    // first (while the user gesture is still active), then hand over the PDF.
+    window.open(WHATSAPP_GROUP_LINK, "_blank", "noopener,noreferrer");
+    setFormMessage("Preparing your enquiry PDF…");
+
+    try {
+      await downloadEnquiryPdf({ name, phone, service, details });
+      setFormMessage(
+        "Your enquiry PDF has been downloaded and the WhatsApp group is open. Attach the PDF and send it to the group."
+      );
+    } catch {
+      setFormMessage("The WhatsApp group is open. Your details are shown below so you can send them.");
+    }
   }
 
   return (
@@ -619,8 +702,8 @@ export default function Home() {
               Tell us what <span>you are working on.</span>
             </h2>
             <p>
-              Share a few details and we will prepare your message and open WhatsApp with our team
-              so you can review it and press send.
+              Share a few details and we will prepare a PDF of your enquiry and open our WhatsApp
+              group so you can attach the PDF and send it to the team.
             </p>
             <div className="contact-promise">
               <i className="fa-solid fa-check" aria-hidden="true" />
@@ -687,7 +770,7 @@ export default function Home() {
               />
             </label>
             <button className="btn btn-primary form-submit" type="submit" suppressHydrationWarning>
-              Send enquiry on WhatsApp <ArrowIcon />
+              Download PDF &amp; open WhatsApp group <ArrowIcon />
             </button>
             {formMessage && (
               <p className="form-message" role="status">
@@ -697,7 +780,7 @@ export default function Home() {
             {preparedMessage && (
               <>
                 <label className="prepared-label">
-                  Your message to the team
+                  Your enquiry summary
                   <textarea
                     className="prepared-message"
                     rows={6}
@@ -707,7 +790,10 @@ export default function Home() {
                   />
                 </label>
                 <div className="wa-fallback">
-                  <span>What if WhatsApp did not open?</span>
+                  <span>Did the group not open?</span>
+                  <a href={WHATSAPP_GROUP_LINK} target="_blank" rel="noopener noreferrer">
+                    Open our WhatsApp group <ArrowIcon diagonal />
+                  </a>
                   {teamContacts.map((member) => (
                     <a
                       key={member.phone}
@@ -715,15 +801,16 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Send to {member.name} <ArrowIcon diagonal />
+                      Send directly to {member.name} <ArrowIcon diagonal />
                     </a>
                   ))}
                 </div>
               </>
             )}
             <p className="form-note">
-              Your message opens in WhatsApp with the details pre-filled. Review it and press send.
-              This form does not store enquiries or book appointments.
+              On submit, a PDF of your enquiry is downloaded and our WhatsApp group opens. Attach the
+              downloaded PDF to the group message and send it. This form does not store enquiries or
+              book appointments.
             </p>
           </form>
         </section>
