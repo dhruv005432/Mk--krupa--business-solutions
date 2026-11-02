@@ -1,344 +1,29 @@
 "use client";
 
 import Image from "next/image";
-import { FormEvent, useState } from "react";
-
-const WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/K2D6dTyPvXyEi0dggEc2IG";
-const githubRepoUrl = "https://github.com/dhruv005432/Mk--krupa--business-solutions";
-
-const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Industries", href: "#industries" },
-  { label: "Team", href: "#team" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
-];
-
-const services = [
-  {
-    number: "01",
-    icon: "fa-solid fa-palette",
-    title: "Brand Development",
-    summary: "Support with brand positioning, identity coordination and launch planning.",
-    inclusions: [
-      "Brand positioning",
-      "Identity coordination",
-      "Packaging direction",
-      "Launch planning",
-    ],
-  },
-  {
-    number: "02",
-    icon: "fa-solid fa-store",
-    title: "Marketplace Assistance",
-    summary: "Guidance with seller onboarding, product listings and catalogues.",
-    inclusions: [
-      "Seller onboarding",
-      "Product listings",
-      "Catalogue preparation",
-      "Documentation support",
-    ],
-  },
-  {
-    number: "03",
-    icon: "fa-solid fa-boxes-stacked",
-    title: "Product Sourcing & Wholesale",
-    summary: "Support with supplier coordination and bulk product enquiries.",
-    inclusions: [
-      "Supplier coordination",
-      "Bulk enquiries",
-      "Quotation support",
-      "Requirement mapping",
-    ],
-  },
-  {
-    number: "04",
-    icon: "fa-solid fa-handshake",
-    title: "Business Consulting",
-    summary: "Business planning and sales-channel guidance for your product or category.",
-    inclusions: [
-      "Business planning",
-      "Sales-channel guidance",
-      "Category exploration",
-      "Growth discussions",
-    ],
-  },
-  {
-    number: "05",
-    icon: "fa-solid fa-globe",
-    title: "Digital Presence",
-    summary: "Website planning and digital catalogue support for your business.",
-    inclusions: [
-      "Website planning",
-      "Digital catalogues",
-      "Enquiry-focused content",
-      "Online presence guidance",
-    ],
-  },
-  {
-    number: "06",
-    icon: "fa-solid fa-layer-group",
-    title: "Product Category Solutions",
-    summary: "Support relevant to the product categories your business works with.",
-    inclusions: [
-      "Category-specific support",
-      "Retail & consumer products",
-      "Wholesale requirements",
-      "Requirement-based discussion",
-    ],
-  },
-];
-
-const industries = [
-  { icon: "fa-solid fa-spa", title: "Beauty & Personal Care" },
-  { icon: "fa-solid fa-wind", title: "Perfumes & Fragrances" },
-  { icon: "fa-solid fa-gem", title: "Fashion & Jewellery" },
-  { icon: "fa-solid fa-couch", title: "Home & Kitchen" },
-  { icon: "fa-solid fa-store", title: "E-commerce & Retail" },
-  { icon: "fa-solid fa-solar-panel", title: "Solar & Renewable Energy" },
-  { icon: "fa-solid fa-hospital", title: "Healthcare & Pharmacy" },
-];
-
-const strengths = [
-  {
-    number: "01",
-    title: "Direct contact",
-    description: "You speak with the people doing the work, not a call centre.",
-  },
-  {
-    number: "02",
-    title: "Scope in writing",
-    description: "Deliverables, timeline and price agreed before any work starts.",
-  },
-  {
-    number: "03",
-    title: "Honest advice",
-    description: "If something is not worth doing for your budget, we say so.",
-  },
-  {
-    number: "04",
-    title: "One point of contact",
-    description: "The same person from your first enquiry through to delivery.",
-  },
-];
-
-const processSteps = [
-  ["01", "Share your goals", "Tell us about your business, product or project requirements."],
-  ["02", "Discuss the requirements", "We understand the scope, expectations and what success looks like for you."],
-  ["03", "Review a proposal", "Receive a clear outline of the agreed work, deliverables and quotation."],
-  ["04", "Move forward together", "Work begins once the scope, terms and timelines are agreed."],
-];
-
-const platforms = ["Amazon", "Flipkart", "Meesho", "AJIO", "JioMart", "Etsy"];
-
-const faqs = [
-  {
-    question: "What services does MK KRUPA provide?",
-    answer:
-      "We support brand development, marketplace assistance, product sourcing and wholesale, business consulting, digital presence and product category solutions. The exact scope is agreed with you before work begins.",
-  },
-  {
-    question: "Can I enquire about just one service?",
-    answer:
-      "Yes. You can enquire about a single service or a combination. Tell us what you need and we will confirm what is possible.",
-  },
-  {
-    question: "Do you work with manufacturers and wholesalers?",
-    answer:
-      "Yes. We work with entrepreneurs, manufacturers, suppliers, retailers and resellers on sourcing, wholesale and sales-channel requirements.",
-  },
-  {
-    question: "Can I discuss product sourcing requirements?",
-    answer:
-      "Yes. Share the product, quantity and specifications you have in mind, and we will discuss supplier coordination and bulk enquiries with you.",
-  },
-  {
-    question: "Do you provide customised service quotations?",
-    answer:
-      "Yes. Every business has different requirements. Contact us to discuss the scope, deliverables and quotation for your project.",
-  },
-  {
-    question: "How can I contact the team?",
-    answer:
-      "Use the enquiry form above. It prepares your message and opens WhatsApp so you can review it and send it directly to our team.",
-  },
-];
-
-const teamContacts = [
-  {
-    name: "Dhruv Dhameliya",
-    phone: "917862832972",
-    role: "Founder & CEO",
-    description:
-      "Leads new enquiries, business discussions and finalising the scope and quotation for each project.",
-    image: "/images/founder-dhruv.png",
-    orientation: "landscape",
-  },
-  {
-    name: "Smit Hirpara",
-    phone: "919726320890",
-    role: "Co-Founder & CMO",
-    description:
-      "Handles brand development and marketplace support, from positioning and identity to listings and catalogues.",
-    image: "/images/cofounder-smit.png",
-    orientation: "landscape",
-  },
-  {
-    name: "S. R. Savani",
-    phone: "919213679919",
-    role: "Business Co-ordinator",
-    description:
-      "Coordinates day-to-day work between clients and the team and keeps project timelines on track.",
-    image: "/images/team-sr-savani.png",
-    orientation: "portrait",
-  },
-];
-
-function formatPhone(phone: string) {
-  return `+${phone.slice(0, 2)} ${phone.slice(2, 7)} ${phone.slice(7)}`;
-}
-
-function ArrowIcon({ diagonal = false }: { diagonal?: boolean }) {
-  return (
-    <svg
-      aria-hidden="true"
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      className={diagonal ? "arrow-diagonal" : ""}
-    >
-      <path
-        d="M4.75 12h14.5m-6-6 6 6-6 6"
-        stroke="currentColor"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-async function downloadEnquiryPdf(enquiry: {
-  name: string;
-  phone: string;
-  email: string;
-  service: string;
-  details: string;
-}) {
-  const { jsPDF } = await import("jspdf");
-  const doc = new jsPDF({ unit: "pt", format: "a4" });
-  const pageWidth = doc.internal.pageSize.getWidth();
-  const margin = 48;
-
-  doc.setFillColor(198, 146, 46);
-  doc.rect(0, 0, pageWidth, 92, "F");
-  doc.setTextColor(255, 255, 255);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(19);
-  doc.text("MK KRUPA BUSINESS SOLUTIONS", margin, 45);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-  doc.text("Brand  ·  Marketplace  ·  Sourcing  ·  Consulting  ·  Digital Presence", margin, 66);
-
-  doc.setTextColor(23, 22, 19);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(15);
-  doc.text("New Website Enquiry", margin, 140);
-
-  const submittedAt = new Date().toLocaleString("en-IN", {
-    dateStyle: "medium",
-    timeStyle: "short",
-  });
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-  doc.setTextColor(111, 107, 99);
-  doc.text(`Submitted: ${submittedAt}`, margin, 160);
-
-  const rows: [string, string][] = [
-    ["Name", enquiry.name],
-    ["Phone / WhatsApp", enquiry.phone],
-    ["Email", enquiry.email || "Not provided"],
-    ["Service", enquiry.service],
-    ["Requirements", enquiry.details || "Not specified"],
-  ];
-
-  const valueX = margin + 150;
-  const valueWidth = pageWidth - margin - valueX;
-  let y = 200;
-
-  rows.forEach(([label, value]) => {
-    doc.setDrawColor(233, 228, 217);
-    doc.line(margin, y - 15, pageWidth - margin, y - 15);
-
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(11);
-    doc.setTextColor(23, 22, 19);
-    doc.text(label, margin, y);
-
-    doc.setFont("helvetica", "normal");
-    doc.setTextColor(60, 58, 54);
-    const lines = doc.splitTextToSize(value, valueWidth);
-    doc.text(lines, valueX, y);
-    y += Math.max(lines.length * 16, 20) + 16;
-  });
-
-  doc.setDrawColor(233, 228, 217);
-  doc.line(margin, y - 15, pageWidth - margin, y - 15);
-  doc.setFontSize(9);
-  doc.setTextColor(140, 136, 128);
-  doc.text(
-    "Generated from the MK KRUPA Business Solutions website contact form.",
-    margin,
-    y + 16
-  );
-
-  const safeName = enquiry.name.replace(/[^a-z0-9]+/gi, "-").replace(/^-+|-+$/g, "");
-  doc.save(`MK-KRUPA-Enquiry-${safeName || "New"}.pdf`);
-}
+import { useState, useEffect } from "react";
+import { ArrowIcon } from "@/components/Icons";
+import ContactSection from "@/components/ContactSection";
+import {
+  navLinks,
+  services,
+  industries,
+  strengths,
+  processSteps,
+  platforms,
+  faqs,
+  teamContacts,
+  githubRepoUrl,
+} from "@/lib/constants";
+import { formatPhone } from "@/lib/utils";
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [formMessage, setFormMessage] = useState("");
-  const [preparedMessage, setPreparedMessage] = useState("");
+  const [currentYear, setCurrentYear] = useState(2026);
 
-  async function handleEnquiry(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const name = String(data.get("name") ?? "").trim();
-    const phone = String(data.get("phone") ?? "").trim();
-    const email = String(data.get("email") ?? "").trim();
-    const service = String(data.get("service") ?? "").trim();
-    const details = String(data.get("details") ?? "").trim();
-
-    const message = [
-      "New enquiry for MK KRUPA Business Solutions",
-      "",
-      `Name: ${name}`,
-      `Phone / WhatsApp: ${phone}`,
-      email ? `Email: ${email}` : "Email: (not provided)",
-      `Service: ${service}`,
-      details ? `Requirements: ${details}` : "Requirements: (not specified)",
-    ].join("\n");
-
-    setPreparedMessage(message);
-
-    // WhatsApp group links cannot carry a pre-filled message, so open the group
-    // first (while the user gesture is still active), then hand over the PDF.
-    window.open(WHATSAPP_GROUP_LINK, "_blank", "noopener,noreferrer");
-    setFormMessage("Preparing your enquiry PDF…");
-
-    try {
-      await downloadEnquiryPdf({ name, phone, email, service, details });
-      setFormMessage(
-        "Your enquiry PDF has been downloaded and the WhatsApp group is open. Attach the PDF and send it to the group."
-      );
-    } catch {
-      setFormMessage("The WhatsApp group is open. Your details are shown below so you can send them.");
-    }
-  }
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
 
   return (
     <>
@@ -352,7 +37,7 @@ export default function Home() {
             </span>
           </a>
 
-          <nav className="nav-links" aria-label="Main navigation">
+          <nav className="nav-links">
             {navLinks.map((link) => (
               <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>
                 {link.label}
@@ -362,17 +47,14 @@ export default function Home() {
 
           <div className="header-actions">
             <a className="btn btn-primary btn-small" href="#contact">
-              Let&apos;s Talk
+              Get Started <ArrowIcon />
             </a>
             <button
-              type="button"
               className="menu-toggle"
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((open) => !open)}
-              suppressHydrationWarning
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
             >
-              <i className={menuOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars"} aria-hidden="true" />
+              <i className={`fa-solid ${menuOpen ? "fa-xmark" : "fa-bars"}`} />
             </button>
           </div>
         </div>
@@ -380,94 +62,80 @@ export default function Home() {
 
       <main>
         {/* 01 — Hero */}
-        <section id="home" className="hero">
-          <div className="section-wrap hero-inner">
+        <section id="home" className="section-wrap hero-section">
+          <div className="hero-inner">
             <div className="hero-copy">
-              <span className="eyebrow">MK KRUPA Business Solutions</span>
+              <span className="eyebrow">Expert Business Support</span>
               <h1>
-                Business solutions that help your brand <span>move forward.</span>
+                Your partner for <span>brand and marketplace growth.</span>
               </h1>
-              <p className="hero-lead">
-                We help entrepreneurs, manufacturers and businesses with brand development,
-                marketplace support, product sourcing and digital presence.
+              <p>
+                We support entrepreneurs and businesses with brand development, marketplace
+                assistance, product sourcing and digital presence to help you reach more customers.
               </p>
               <div className="hero-actions">
-                <a className="btn btn-primary" href="#services">
-                  Explore our services <ArrowIcon />
+                <a className="btn btn-primary" href="#contact">
+                  Start your enquiry <ArrowIcon />
                 </a>
-                <a className="btn btn-ghost" href="#contact">
-                  Contact us
+                <a className="btn btn-ghost" href="#services">
+                  View services
                 </a>
               </div>
-              <ul className="hero-tags">
-                <li>Brand development</li>
-                <li>Marketplace assistance</li>
-                <li>Product sourcing</li>
-                <li>Business consulting</li>
-                <li>Digital presence</li>
-                <li>Category solutions</li>
-              </ul>
             </div>
             <div className="hero-visual">
               <div className="hero-image-frame">
                 <Image
-                  src="/images/founder-dhruv.png"
-                  alt="Dhruv Dhameliya, founder of MK KRUPA Business Solutions"
-                  fill
+                  src="/images/hero-business.png"
+                  alt="MK KRUPA Business Support"
+                  width={600}
+                  height={400}
                   priority
-                  sizes="(max-width: 880px) 90vw, 44vw"
+                  className="hero-photo"
                 />
-                <div className="image-caption">
-                  <span>YOUR VISION</span>
-                  <i />
-                  <span>OUR SOLUTION</span>
-                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* 02 — About */}
-        <section id="about" className="section-wrap section about-section">
-          <div className="about-mark">
-            <Image
-              src="/images/mk-krupa-logo.png"
-              alt="MK KRUPA Business Solutions logo"
-              fill
-              sizes="(max-width: 880px) 60vw, 30vw"
-            />
-          </div>
-          <div className="about-copy">
-            <span className="eyebrow">About MK KRUPA</span>
-            <h2>
-              Your vision. <span>Our solution.</span>
-            </h2>
-            <p>
-              MK KRUPA Business Solutions works with entrepreneurs and companies on brand
-              development, marketplace assistance, product sourcing and business consulting.
-            </p>
-            <p>
-              Every enquiry gets a specific reply — what we can do, what it costs and how long
-              it takes. There are no fixed packages or invented prices. If we are not the right
-              fit for a project, we will say so.
-            </p>
-            <a className="text-link" href="#contact">
-              Tell us about your project <ArrowIcon />
-            </a>
+        <section id="about" className="about-section section">
+          <div className="section-wrap about-inner">
+            <div className="about-mark">
+              <Image src="/images/mk-krupa-logo.png" alt="" width={120} height={120} />
+            </div>
+            <div className="about-copy">
+              <span className="eyebrow">About MK KRUPA</span>
+              <h2>
+                A modular team for <span>modern business needs.</span>
+              </h2>
+              <p>
+                MK KRUPA Business Solutions provides a range of B2B support services. We understand
+                that every business has unique requirements, so we offer modular solutions across
+                branding, marketplace operations and sourcing.
+              </p>
+              <p>
+                Our goal is to provide honest, clear and actionable support that helps you focus on
+                running your business while we handle the technical and operational details.
+              </p>
+              <a className="text-link" href="#contact">
+                Contact us to discuss your project <ArrowIcon />
+              </a>
+            </div>
           </div>
         </section>
 
         {/* 03 — Services */}
-        <section id="services" className="section services-section">
+        <section id="services" className="services-section section">
           <div className="section-wrap">
             <div className="section-heading">
               <div>
+                <span className="eyebrow">Our Services</span>
                 <h2>
                   Six services, <span>one point of contact.</span>
                 </h2>
               </div>
-              <p className="heading-aside">
-                Every service includes a clear scope and a written quotation. Pick the one that
+              <p>
+                Modular B2B support designed to fit your business requirements. We help you choose what
                 fits where you are today — if you are not sure, send an enquiry and we will point
                 you in the right direction.
               </p>
@@ -505,30 +173,24 @@ export default function Home() {
         <section id="industries" className="section-wrap industries-section">
           <div className="section-heading">
             <div>
+              <span className="eyebrow">Industries & Categories</span>
               <h2>
-                Industries and categories <span>we currently work with.</span>
+                Product categories <span>we support.</span>
               </h2>
             </div>
-            <p className="heading-aside">
-              Not every service applies to every category. Tell us what you deal in and we will
-              confirm the support we can genuinely offer.
+            <p>
+              Our experience spans across retail, consumer products and specialized B2B categories.
+              We help you navigate the specific requirements of each industry.
             </p>
           </div>
           <div className="industry-grid">
-            {industries.map((industry, index) => (
+            {industries.map((industry) => (
               <a className="industry-card" href="#contact" key={industry.title}>
-                <span className="industry-icon" aria-hidden="true">
-                  <i className={industry.icon} />
-                </span>
-                <span className="industry-number">0{index + 1}</span>
-                <span className="industry-title">{industry.title}</span>
+                <i className={industry.icon} aria-hidden="true" />
+                <span>{industry.title}</span>
               </a>
             ))}
           </div>
-          <p className="section-footnote">
-            Product availability and category-specific services are confirmed individually. Some
-            categories may require relevant licences or compliance.
-          </p>
         </section>
 
         {/* 05 — Platforms */}
@@ -540,10 +202,8 @@ export default function Home() {
               </h2>
               <p>
                 Platform selection depends on your products, pricing and business requirements.
-                We can help you explore the marketplaces that fit.
+                We help you coordinate onboarding and listings across major marketplaces.
               </p>
-            </div>
-            <div>
               <ul className="platform-list" aria-label="Marketplace platforms">
                 {platforms.map((platform) => (
                   <li key={platform}>{platform}</li>
@@ -557,57 +217,56 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 06 — Why work with us */}
-        <section id="why" className="section-wrap section">
-          <div className="why-inner">
-            <div className="why-copy">
+        {/* 06 — Why Us */}
+        <section className="section-wrap section">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">Why MK KRUPA</span>
               <h2>
-                What working with us <span>actually looks like.</span>
+                Four reasons to <span>work with us.</span>
               </h2>
-              <p>
-                Tell us what you sell or plan to sell. We will come back with what we can do, what
-                it costs and what we need from you.
-              </p>
-              <a className="btn btn-light" href="#about">
-                Get to know us <ArrowIcon />
-              </a>
             </div>
-            <div className="strengths-grid">
-              {strengths.map((item) => (
-                <article className="strength-card" key={item.number}>
-                  <span>{item.number}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </article>
-              ))}
-            </div>
+            <p>
+              We believe in clear communication, honest advice and a single point of contact to
+              make your project run smoothly.
+            </p>
+          </div>
+          <div className="strengths-grid">
+            {strengths.map((strength) => (
+              <div className="strength-card" key={strength.number}>
+                <span className="strength-number">{strength.number}</span>
+                <h3>{strength.title}</h3>
+                <p>{strength.description}</p>
+              </div>
+            ))}
           </div>
         </section>
 
-        {/* 07 — How we work */}
-        <section id="work" className="work-section">
+        {/* 07 — How We Work */}
+        <section className="work-section section">
           <div className="section-wrap work-inner">
             <div className="work-copy">
+              <span className="eyebrow">Our Process</span>
               <h2>
-                From first message <span>to agreed scope.</span>
+                How we move from <span>enquiry to delivery.</span>
               </h2>
               <p>
-                Four simple steps, and you know where you stand at each one. Nothing starts until
-                you have the scope and price in writing.
+                A simple four-step process to ensure everyone is on the same page before any work
+                begins.
               </p>
               <a className="text-link" href="#contact">
-                Start a conversation <ArrowIcon />
+                Start your enquiry today <ArrowIcon />
               </a>
             </div>
             <div className="process-list">
-              {processSteps.map(([number, title, description]) => (
-                <article className="process-step" key={number}>
-                  <span className="process-number">{number}</span>
+              {processSteps.map(([num, title, desc]) => (
+                <div className="process-item" key={num}>
+                  <span className="process-num">{num}</span>
                   <div>
                     <h3>{title}</h3>
-                    <p>{description}</p>
+                    <p>{desc}</p>
                   </div>
-                </article>
+                </div>
               ))}
             </div>
           </div>
@@ -615,48 +274,49 @@ export default function Home() {
 
         {/* 08 — Team */}
         <section id="team" className="section-wrap section">
-          <div className="team-heading">
-            <span className="eyebrow">Our Team</span>
-            <h2>
-              We, the terrific team <span>of MK KRUPA.</span>
-            </h2>
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">Meet the Team</span>
+              <h2>
+                Expertise behind <span>every project.</span>
+              </h2>
+            </div>
             <p>
-              Three people run MK KRUPA — leadership, brand and marketplace support, and
+              A modular team that brings together founders and coordinators to ensure
               day-to-day coordination. Your enquiry goes to the person who owns it.
             </p>
           </div>
-
-          <div className="team-zigzag">
+          <div className="team-grid">
             {teamContacts.map((member, index) => (
               <article
-                key={member.name}
-                className={`team-item ${index % 2 === 0 ? "team-item-left" : "team-item-right"}`}
+                key={member.phone}
+                className={`team-item ${index % 2 === 0 ? "" : "team-item-right"}`}
               >
-                <div className={`team-photo photo-${member.orientation}`}>
+                <div className="team-visual">
                   <Image
                     src={member.image}
                     alt={member.name}
-                    fill
-                    sizes="(max-width: 880px) 100vw, 32vw"
+                    width={400}
+                    height={index % 2 === 0 ? 267 : 533}
+                    className={`team-photo photo-${member.orientation}`}
                   />
                 </div>
                 <div className="team-copy">
-                  <p className="team-role">{member.role}</p>
+                  <span className="team-role">{member.role}</span>
                   <h3>{member.name}</h3>
-                  <p className="team-desc">{member.description}</p>
-                  <div className="team-actions">
-                    <a className="team-phone" href={`tel:+${member.phone}`}>
+                  <p>{member.description}</p>
+                  <div className="team-contact-actions">
+                    <span className="team-phone">
                       <i className="fa-solid fa-phone" aria-hidden="true" />
                       {formatPhone(member.phone)}
-                    </a>
+                    </span>
                     <a
-                      className="btn btn-whatsapp btn-small"
                       href={`https://wa.me/${member.phone}`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="btn btn-primary btn-small wa-btn"
                     >
-                      <i className="fa-brands fa-whatsapp" aria-hidden="true" />
-                      Chat on WhatsApp
+                      <i className="fa-brands fa-whatsapp" aria-hidden="true" /> WhatsApp
                     </a>
                   </div>
                 </div>
@@ -666,27 +326,27 @@ export default function Home() {
         </section>
 
         {/* 09 — FAQ */}
-        <section id="faq" className="faq-section">
+        <section id="faq" className="faq-section section">
           <div className="section-wrap faq-inner">
-            <div className="faq-heading">
+            <div className="faq-copy">
+              <span className="eyebrow">Questions</span>
               <h2>
-                Questions we <span>get asked most.</span>
+                Frequently <span>asked questions.</span>
               </h2>
               <p>
-                Have a question that is not covered here? Send us a message and we will be happy to
-                discuss it.
+                If you have a question that isn&apos;t answered here, feel free to send an enquiry
+                through the form.
               </p>
               <a className="text-link" href="#contact">
-                Ask us directly <ArrowIcon />
+                Still have questions? <ArrowIcon />
               </a>
             </div>
             <div className="faq-list">
-              {faqs.map((faq, index) => (
+              {faqs.map((faq) => (
                 <details className="faq-item" key={faq.question}>
                   <summary>
-                    <span className="faq-index">0{index + 1}</span>
-                    <span>{faq.question}</span>
-                    <i aria-hidden="true">+</i>
+                    {faq.question}
+                    <i className="fa-solid fa-chevron-down" aria-hidden="true" />
                   </summary>
                   <p>{faq.answer}</p>
                 </details>
@@ -696,138 +356,7 @@ export default function Home() {
         </section>
 
         {/* 10 — Contact */}
-        <section id="contact" className="section-wrap contact-inner">
-          <div className="contact-copy">
-            <span className="eyebrow">Contact us</span>
-            <h2>
-              Tell us what <span>you are working on.</span>
-            </h2>
-            <p>
-              Share a few details and we will prepare a PDF of your enquiry and open our WhatsApp
-              group so you can attach the PDF and send it to the team.
-            </p>
-            <div className="contact-details">
-              <span>MK KRUPA BUSINESS SOLUTIONS</span>
-              <small>Business enquiries · Service discussions · Wholesale requirements</small>
-            </div>
-          </div>
-
-          <form className="contact-form" onSubmit={handleEnquiry}>
-            <div className="form-heading">
-              <span>01 / ENQUIRY FORM</span>
-              <h3>Tell us what you are looking for.</h3>
-              <p>Fields marked with * are required.</p>
-            </div>
-
-            <fieldset className="form-group">
-              <legend className="form-group-title">Your details</legend>
-              <div className="form-row">
-                <label>
-                  Your name <span>*</span>
-                  <input
-                    type="text"
-                    name="name"
-                    autoComplete="name"
-                    placeholder="e.g. Priya Shah"
-                    required
-                    suppressHydrationWarning
-                  />
-                </label>
-                <label>
-                  Phone / WhatsApp <span>*</span>
-                  <input
-                    type="tel"
-                    name="phone"
-                    autoComplete="tel"
-                    placeholder="e.g. +91 98765 43210"
-                    required
-                    suppressHydrationWarning
-                  />
-                </label>
-              </div>
-              <label>
-                Email <small>(optional)</small>
-                <input
-                  type="email"
-                  name="email"
-                  autoComplete="email"
-                  placeholder="e.g. priya@example.com"
-                  suppressHydrationWarning
-                />
-              </label>
-            </fieldset>
-
-            <fieldset className="form-group">
-              <legend className="form-group-title">Your requirement</legend>
-              <label>
-                Service you are interested in <span>*</span>
-                <select name="service" defaultValue="" required suppressHydrationWarning>
-                  <option value="" disabled>
-                    Select a service
-                  </option>
-                  {services.map((service) => (
-                    <option key={service.title} value={service.title}>
-                      {service.title}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label>
-                Your requirements
-                <textarea
-                  name="details"
-                  rows={4}
-                  placeholder="What are you planning, and how can we help?"
-                  suppressHydrationWarning
-                />
-              </label>
-            </fieldset>
-
-            <button className="btn btn-primary form-submit" type="submit" suppressHydrationWarning>
-              Download PDF &amp; open WhatsApp group <ArrowIcon />
-            </button>
-            {formMessage && (
-              <p className="form-message" role="status">
-                {formMessage}
-              </p>
-            )}
-            {preparedMessage && (
-              <>
-                <label className="prepared-label">
-                  Your enquiry summary
-                  <textarea
-                    className="prepared-message"
-                    rows={6}
-                    readOnly
-                    value={preparedMessage}
-                    onFocus={(event) => event.currentTarget.select()}
-                  />
-                </label>
-                <div className="wa-fallback">
-                  <span>Did the group not open?</span>
-                  <a href={WHATSAPP_GROUP_LINK} target="_blank" rel="noopener noreferrer">
-                    Open our WhatsApp group <ArrowIcon diagonal />
-                  </a>
-                  {teamContacts.map((member) => (
-                    <a
-                      key={member.phone}
-                      href={`https://wa.me/${member.phone}?text=${encodeURIComponent(preparedMessage)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Send directly to {member.name} <ArrowIcon diagonal />
-                    </a>
-                  ))}
-                </div>
-              </>
-            )}
-            <p className="form-note">
-              On submit, a PDF of your enquiry is downloaded and our WhatsApp group opens. Attach the
-              downloaded PDF to the group message and send it. This form does not store enquiries or
-              book appointments.
-            </p>
-          </form>
-        </section>
+        <ContactSection />
       </main>
 
       <footer className="site-footer">
@@ -842,50 +371,32 @@ export default function Home() {
             </a>
             <p>Brand, marketplace, sourcing and consulting support for small businesses.</p>
           </div>
-
-          <div className="footer-column">
-            <h3>Explore</h3>
+          <div className="footer-nav">
+            <strong>Quick Links</strong>
             <a href="#about">About us</a>
-            <a href="#team">Our team</a>
-            <a href="#work">Our approach</a>
-            <a href="#faq">FAQs</a>
-          </div>
-
-          <div className="footer-column">
-            <h3>Services</h3>
-            {services.slice(0, 4).map((service) => (
-              <a href="#services" key={service.title}>
-                {service.title}
-              </a>
-            ))}
-          </div>
-
-          <div className="footer-column">
-            <h3>Let&apos;s connect</h3>
+            <a href="#services">Our services</a>
             <a href="#contact">Request a quote</a>
             <a href="#contact">Discuss a project</a>
-            <a href={githubRepoUrl} target="_blank" rel="noopener noreferrer">
-              GitHub repository
-            </a>
+          </div>
+          <div className="footer-nav">
+            <strong>Connect</strong>
             {teamContacts.map((member) => (
-              <a
-                className="footer-contact"
-                key={member.phone}
-                href={`https://wa.me/${member.phone}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="footer-contact-name">{member.name}</span>
-                <span className="footer-contact-number">{formatPhone(member.phone)}</span>
-              </a>
+              <div key={member.phone} className="footer-contact">
+                <i className="fa-brands fa-whatsapp" aria-hidden="true" />
+                <div>
+                  <span className="footer-contact-name">{member.name}</span>
+                  <span className="footer-contact-number">{formatPhone(member.phone)}</span>
+                </div>
+              </div>
             ))}
           </div>
         </div>
-
         <div className="section-wrap footer-bottom">
-          <span>© 2026 MK KRUPA Business Solutions. All rights reserved.</span>
-          <a href="#home">Back to top</a>
+          <span>&copy; {currentYear} MK KRUPA Business Solutions.</span>
           <span>Platform names belong to their respective owners.</span>
+          <a href={githubRepoUrl} target="_blank" rel="noopener noreferrer">
+            GitHub Repository
+          </a>
         </div>
       </footer>
     </>
