@@ -7,25 +7,34 @@ export default function About() {
     <section id="about" className="about-section section">
       <div className="section-wrap about-inner">
         <div className="about-mark">
-          <Image src="/images/mk-krupa-logo.png" alt="" width={120} height={120} />
+          <Image
+            src="/images/mk-krupa-logo.png"
+            alt="MK KRUPA Emblem"
+            width={120}
+            height={120}
+          />
         </div>
         <div className="about-copy">
           <span className="eyebrow">About MK KRUPA</span>
           <h2>
-            A modular team for <span>modern business needs.</span>
+            A practical partner for <span>growing businesses.</span>
           </h2>
           <p>
-            MK KRUPA Business Solutions provides a range of B2B support services. We understand
-            that every business has unique requirements, so we offer modular solutions across
-            branding, marketplace operations and sourcing.
+            MK KRUPA Business Solutions was built to give manufacturers, independent brands, and
+            entrepreneurs a dependable, modular team. We bridge the gap between product creation
+            and commercial execution.
           </p>
           <p>
-            Our goal is to provide honest, clear and actionable support that helps you focus on
-            running your business while we handle the technical and operational details.
+            Whether you are establishing a new brand identity, listing on leading marketplaces,
+            sourcing bulk inventory, or setting up your digital presence, you work directly with our
+            core team. Every project has a clearly defined scope, deliverables, and transparent
+            pricing agreed upon before work begins.
           </p>
-          <a className="text-link" href="#contact">
-            Contact us to discuss your project <ArrowIcon />
-          </a>
+          <div className="about-actions">
+            <a className="text-link" href="#contact">
+              Discuss your project with our team <ArrowIcon />
+            </a>
+          </div>
         </div>
       </div>
     </section>

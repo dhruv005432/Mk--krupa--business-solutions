@@ -7,26 +7,29 @@ export default function FAQ() {
     <section id="faq" className="faq-section section">
       <div className="section-wrap faq-inner">
         <div className="faq-copy">
-          <span className="eyebrow">Questions</span>
+          <span className="eyebrow">Common Questions</span>
           <h2>
             Frequently <span>asked questions.</span>
           </h2>
           <p>
-            If you have a question that isn&apos;t answered here, feel free to send an enquiry
-            through the form.
+            Have questions before reaching out? Here are plain-language answers about our scope,
+            custom quotations, and working process.
           </p>
           <a className="text-link" href="#contact">
-            Still have questions? <ArrowIcon />
+            Ready to discuss your project? <ArrowIcon />
           </a>
         </div>
+
         <div className="faq-list">
-          {faqs.map((faq) => (
-            <details className="faq-item" key={faq.question}>
+          {faqs.map((faq, index) => (
+            <details className="faq-item" key={faq.question} open={index === 0}>
               <summary>
-                {faq.question}
-                <i className="fa-solid fa-chevron-down" aria-hidden="true" />
+                <span>{faq.question}</span>
+                <i className="fa-solid fa-chevron-down faq-chevron" aria-hidden="true" />
               </summary>
-              <p>{faq.answer}</p>
+              <div className="faq-answer">
+                <p>{faq.answer}</p>
+              </div>
             </details>
           ))}
         </div>
