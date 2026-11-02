@@ -706,14 +706,6 @@ export default function Home() {
               Share a few details and we will prepare a PDF of your enquiry and open our WhatsApp
               group so you can attach the PDF and send it to the team.
             </p>
-            <div className="contact-promise">
-              <i className="fa-solid fa-check" aria-hidden="true" />
-              <p>
-                <strong>A clear conversation, first.</strong>
-                <br />
-                No commitment required to make an enquiry.
-              </p>
-            </div>
             <div className="contact-details">
               <span>MK KRUPA BUSINESS SOLUTIONS</span>
               <small>Business enquiries · Service discussions · Wholesale requirements</small>

@@ -1041,31 +1041,6 @@ ul {
   max-width: 44ch;
 }
 
-.contact-promise {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-top: 18px;
-  padding: 16px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--cream);
-}
-
-.contact-promise i {
-  color: var(--green);
-  margin-top: 3px;
-}
-
-.contact-promise p {
-  font-size: 0.92rem;
-  color: var(--muted);
-}
-
-.contact-promise strong {
-  color: var(--ink);
-}
-
 .contact-details {
   margin-top: 18px;
   display: flex;
