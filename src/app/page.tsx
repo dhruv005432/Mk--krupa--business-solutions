@@ -469,12 +469,9 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="services-zigzag">
-              {services.map((service, index) => (
-                <article
-                  key={service.number}
-                  className={`service-card ${index % 2 === 0 ? "service-card-left" : "service-card-right"}`}
-                >
+            <div className="services-grid">
+              {services.map((service) => (
+                <article key={service.number} className="service-card">
                   <div className="service-card-top">
                     <span className="service-icon" aria-hidden="true">
                       <i className={service.icon} />
