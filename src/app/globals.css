@@ -482,23 +482,43 @@ ul {
 .services-zigzag {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
 
 .service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   width: min(100%, 620px);
-  background: var(--paper);
+  padding: 24px 26px;
+  background: linear-gradient(180deg, var(--paper) 0%, #fffcf5 100%);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 22px 24px;
   box-shadow: var(--shadow-sm);
+  overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  background: var(--gold);
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 .service-card:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
   border-color: var(--gold-light);
+}
+
+.service-card:hover::before {
+  opacity: 1;
 }
 
 .service-card-left {
@@ -513,43 +533,52 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 13px;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
 .service-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--gold-light);
+  border-radius: 13px;
   background: var(--gold-light);
   color: var(--gold-dark);
-  font-size: 1.1rem;
+  font-size: 1.12rem;
 }
 
 .service-number {
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   font-weight: 800;
-  color: var(--line-strong);
+  line-height: 1;
   letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  color: #c8bda4;
 }
 
 .service-card h3 {
-  font-size: 1.28rem;
+  font-size: 1.24rem;
+  line-height: 1.25;
 }
 
 .service-card > p {
-  margin-top: 10px;
+  margin-top: 8px;
+  font-size: 0.95rem;
+  line-height: 1.6;
   color: var(--muted);
 }
 
 .inclusion-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px 18px;
-  margin-top: 18px;
-  padding-top: 18px;
+  align-items: start;
+  gap: 9px 20px;
+  margin-top: 16px;
+  padding-top: 16px;
   border-top: 1px solid var(--line);
 }
 
@@ -558,17 +587,26 @@ ul {
   align-items: flex-start;
   gap: 9px;
   font-size: 0.88rem;
+  line-height: 1.45;
   color: var(--ink);
 }
 
 .inclusion-list i {
+  flex-shrink: 0;
+  margin-top: 3px;
   color: var(--green);
-  font-size: 0.8rem;
-  margin-top: 4px;
+  font-size: 0.78rem;
 }
 
 .service-card .text-link {
-  margin-top: 20px;
+  align-self: flex-start;
+  margin-top: 18px;
+}
+
+.service-card .text-link:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
 /* Industries */
