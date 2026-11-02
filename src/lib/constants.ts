@@ -126,8 +126,6 @@ export const processSteps = [
   ["04", "Move forward together", "Work begins once the scope, terms and timelines are agreed."],
 ];
 
-export const platforms = ["Amazon", "Flipkart", "Meesho", "AJIO", "JioMart", "Etsy"];
-
 export const faqs = [
   {
     question: "What services does MK KRUPA provide?",

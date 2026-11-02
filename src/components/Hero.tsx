@@ -4,8 +4,8 @@ import { ArrowIcon } from "./Icons";
 
 export default function Hero() {
   return (
-    <section id="home" className="section-wrap hero-section">
-      <div className="hero-inner">
+    <section id="home" className="hero-section">
+      <div className="section-wrap hero-inner">
         <div className="hero-copy">
           <span className="eyebrow">Expert Business Support</span>
           <h1>
@@ -27,7 +27,7 @@ export default function Hero() {
         <div className="hero-visual">
           <div className="hero-image-frame">
             <Image
-              src="/images/hero-business.png"
+              src="/images/hero-business.jpg"
               alt="MK KRUPA Business Support"
               width={600}
               height={400}

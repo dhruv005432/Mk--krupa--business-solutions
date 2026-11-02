@@ -43,7 +43,6 @@ export default function Footer({ currentYear }: FooterProps) {
       </div>
       <div className="section-wrap footer-bottom">
         <span>&copy; {currentYear} MK KRUPA Business Solutions.</span>
-        <span>Platform names belong to their respective owners.</span>
         <a href={githubRepoUrl} target="_blank" rel="noopener noreferrer">
           GitHub Repository
         </a>
