@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MK KRUPA Business Solutions | Brand, Marketplace & Sourcing Support",
-  description:
-    "MK KRUPA Business Solutions helps entrepreneurs, manufacturers and businesses with brand development, marketplace assistance, product sourcing, business consulting and digital presence.",
+  title: "MK KRUPA Business Solutions",
+  description: "Brand development, marketplace support, sourcing and consulting.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
       <head>
