@@ -14,7 +14,7 @@
   --night: #201f1b;
   --green: #2d6a4f;
   --green-dark: #22553f;
-  --section-pad: 76px;
+  --section-pad: 60px;
   --wrap: 1180px;
   --radius: 14px;
   --shadow-sm: 0 2px 10px rgba(32, 31, 27, 0.05);
@@ -324,7 +324,7 @@ ul {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   align-items: center;
-  gap: 52px;
+  gap: 40px;
   padding-block: var(--section-pad);
 }
 
@@ -347,15 +347,15 @@ ul {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 26px;
+  margin-top: 20px;
 }
 
 .hero-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 26px;
-  padding-top: 22px;
+  margin-top: 20px;
+  padding-top: 16px;
   border-top: 1px solid var(--line);
 }
 
@@ -418,7 +418,7 @@ ul {
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
   align-items: end;
   gap: 28px;
-  margin-bottom: 42px;
+  margin-bottom: 30px;
 }
 
 .section-heading h2 span {
@@ -431,7 +431,7 @@ ul {
 }
 
 .section-footnote {
-  margin-top: 26px;
+  margin-top: 20px;
   font-size: 0.82rem;
   color: var(--muted);
   text-align: center;
@@ -442,7 +442,7 @@ ul {
   display: grid;
   grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
   align-items: center;
-  gap: 48px;
+  gap: 36px;
 }
 
 .about-mark {
@@ -482,7 +482,7 @@ ul {
 .services-zigzag {
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 20px;
 }
 
 .service-card {
@@ -490,7 +490,7 @@ ul {
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 28px 30px;
+  padding: 22px 24px;
   box-shadow: var(--shadow-sm);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
@@ -513,7 +513,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 13px;
 }
 
 .service-icon {
@@ -579,14 +579,14 @@ ul {
 .industry-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 
 .industry-card {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 22px 20px;
+  padding: 18px 18px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--paper);
@@ -632,7 +632,7 @@ ul {
 .platforms-inner {
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: 44px;
+  gap: 34px;
   align-items: center;
   padding-block: var(--section-pad);
 }
@@ -677,7 +677,7 @@ ul {
 .why-inner {
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: 44px;
+  gap: 34px;
   align-items: start;
 }
 
@@ -692,17 +692,17 @@ ul {
 }
 
 .why-copy .btn {
-  margin-top: 24px;
+  margin-top: 18px;
 }
 
 .strengths-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 
 .strength-card {
-  padding: 24px 22px;
+  padding: 20px 20px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--paper);
@@ -736,7 +736,7 @@ ul {
 .work-inner {
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: 44px;
+  gap: 34px;
   align-items: start;
   padding-block: var(--section-pad);
 }
@@ -764,7 +764,7 @@ ul {
 .process-step {
   display: flex;
   gap: 18px;
-  padding: 20px 22px;
+  padding: 16px 18px;
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -797,7 +797,7 @@ ul {
 /* Team */
 .team-heading {
   max-width: 62ch;
-  margin-bottom: 44px;
+  margin-bottom: 34px;
 }
 
 .team-heading p {
@@ -808,7 +808,7 @@ ul {
 .team-zigzag {
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 20px;
 }
 
 .team-item {
@@ -890,7 +890,7 @@ ul {
   align-items: center;
   gap: 14px;
   margin-top: auto;
-  padding-top: 22px;
+  padding-top: 16px;
 }
 
 .team-phone {
@@ -915,7 +915,7 @@ ul {
 .faq-inner {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: 44px;
+  gap: 34px;
   align-items: start;
   padding-block: var(--section-pad);
 }
@@ -994,7 +994,7 @@ ul {
 .contact-inner {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 48px;
+  gap: 36px;
   align-items: start;
   padding-block: var(--section-pad);
 }
@@ -1013,8 +1013,8 @@ ul {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  margin-top: 24px;
-  padding: 18px;
+  margin-top: 18px;
+  padding: 16px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--cream);
@@ -1035,7 +1035,7 @@ ul {
 }
 
 .contact-details {
-  margin-top: 24px;
+  margin-top: 18px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -1055,7 +1055,7 @@ ul {
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 18px;
-  padding: 32px;
+  padding: 26px;
   box-shadow: var(--shadow-md);
 }
 
@@ -1085,7 +1085,7 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 7px;
-  margin-bottom: 16px;
+  margin-bottom: 13px;
   font-size: 0.88rem;
   font-weight: 700;
 }
@@ -1187,7 +1187,7 @@ ul {
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
   gap: 34px;
-  padding-block: 58px 40px;
+  padding-block: 44px 30px;
 }
 
 .brand-footer .brand-copy strong {
@@ -1252,7 +1252,7 @@ ul {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding-block: 22px;
+  padding-block: 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.09);
   font-size: 0.78rem;
   color: #8f8a80;
@@ -1276,7 +1276,7 @@ ul {
 
 @media (max-width: 880px) {
   :root {
-    --section-pad: 56px;
+    --section-pad: 44px;
   }
 
   .nav-links,
@@ -1318,7 +1318,7 @@ ul {
   .faq-inner,
   .contact-inner {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
   }
 
   .hero-visual {
@@ -1328,8 +1328,8 @@ ul {
 
   .section-heading {
     grid-template-columns: 1fr;
-    gap: 16px;
-    margin-bottom: 32px;
+    gap: 14px;
+    margin-bottom: 26px;
   }
 
   .service-card,
