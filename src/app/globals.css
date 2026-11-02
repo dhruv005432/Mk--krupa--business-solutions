@@ -1092,7 +1092,9 @@ ul {
 }
 
 .form-heading {
-  margin-bottom: 22px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
 }
 
 .form-heading span {
@@ -1111,6 +1113,30 @@ ul {
   margin-top: 6px;
   font-size: 0.82rem;
   color: var(--muted);
+}
+
+.form-group {
+  margin: 0 0 18px;
+  padding: 0;
+  border: 0;
+}
+
+.form-group-title {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 12px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 14px;
 }
 
 .contact-form label {
@@ -1400,7 +1426,8 @@ ul {
 
   .industry-grid,
   .strengths-grid,
-  .inclusion-list {
+  .inclusion-list,
+  .form-row {
     grid-template-columns: 1fr;
   }
 

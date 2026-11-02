@@ -224,6 +224,7 @@ function ArrowIcon({ diagonal = false }: { diagonal?: boolean }) {
 async function downloadEnquiryPdf(enquiry: {
   name: string;
   phone: string;
+  email: string;
   service: string;
   details: string;
 }) {
@@ -259,6 +260,7 @@ async function downloadEnquiryPdf(enquiry: {
   const rows: [string, string][] = [
     ["Name", enquiry.name],
     ["Phone / WhatsApp", enquiry.phone],
+    ["Email", enquiry.email || "Not provided"],
     ["Service", enquiry.service],
     ["Requirements", enquiry.details || "Not specified"],
   ];
@@ -307,6 +309,7 @@ export default function Home() {
     const data = new FormData(event.currentTarget);
     const name = String(data.get("name") ?? "").trim();
     const phone = String(data.get("phone") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
     const service = String(data.get("service") ?? "").trim();
     const details = String(data.get("details") ?? "").trim();
 
@@ -315,6 +318,7 @@ export default function Home() {
       "",
       `Name: ${name}`,
       `Phone / WhatsApp: ${phone}`,
+      email ? `Email: ${email}` : "Email: (not provided)",
       `Service: ${service}`,
       details ? `Requirements: ${details}` : "Requirements: (not specified)",
     ].join("\n");
@@ -327,7 +331,7 @@ export default function Home() {
     setFormMessage("Preparing your enquiry PDF…");
 
     try {
-      await downloadEnquiryPdf({ name, phone, service, details });
+      await downloadEnquiryPdf({ name, phone, email, service, details });
       setFormMessage(
         "Your enquiry PDF has been downloaded and the WhatsApp group is open. Attach the PDF and send it to the group."
       );
@@ -722,50 +726,71 @@ export default function Home() {
               <h3>Tell us what you are looking for.</h3>
               <p>Fields marked with * are required.</p>
             </div>
-            <label>
-              Your name <span>*</span>
-              <input
-                type="text"
-                name="name"
-                autoComplete="name"
-                placeholder="e.g. Priya Shah"
-                required
-                suppressHydrationWarning
-              />
-            </label>
-            <label>
-              Phone / WhatsApp number <span>*</span>
-              <input
-                type="tel"
-                name="phone"
-                autoComplete="tel"
-                placeholder="e.g. +91 98765 43210"
-                required
-                suppressHydrationWarning
-              />
-            </label>
-            <label>
-              Service you are interested in <span>*</span>
-              <select name="service" defaultValue="" required suppressHydrationWarning>
-                <option value="" disabled>
-                  Select a service
-                </option>
-                {services.map((service) => (
-                  <option key={service.title} value={service.title}>
-                    {service.title}
+
+            <fieldset className="form-group">
+              <legend className="form-group-title">Your details</legend>
+              <div className="form-row">
+                <label>
+                  Your name <span>*</span>
+                  <input
+                    type="text"
+                    name="name"
+                    autoComplete="name"
+                    placeholder="e.g. Priya Shah"
+                    required
+                    suppressHydrationWarning
+                  />
+                </label>
+                <label>
+                  Phone / WhatsApp <span>*</span>
+                  <input
+                    type="tel"
+                    name="phone"
+                    autoComplete="tel"
+                    placeholder="e.g. +91 98765 43210"
+                    required
+                    suppressHydrationWarning
+                  />
+                </label>
+              </div>
+              <label>
+                Email <small>(optional)</small>
+                <input
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  placeholder="e.g. priya@example.com"
+                  suppressHydrationWarning
+                />
+              </label>
+            </fieldset>
+
+            <fieldset className="form-group">
+              <legend className="form-group-title">Your requirement</legend>
+              <label>
+                Service you are interested in <span>*</span>
+                <select name="service" defaultValue="" required suppressHydrationWarning>
+                  <option value="" disabled>
+                    Select a service
                   </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              Your requirements <small>(optional)</small>
-              <textarea
-                name="details"
-                rows={3}
-                placeholder="What are you planning, and how can we help?"
-                suppressHydrationWarning
-              />
-            </label>
+                  {services.map((service) => (
+                    <option key={service.title} value={service.title}>
+                      {service.title}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Your requirements
+                <textarea
+                  name="details"
+                  rows={4}
+                  placeholder="What are you planning, and how can we help?"
+                  suppressHydrationWarning
+                />
+              </label>
+            </fieldset>
+
             <button className="btn btn-primary form-submit" type="submit" suppressHydrationWarning>
               Download PDF &amp; open WhatsApp group <ArrowIcon />
             </button>
